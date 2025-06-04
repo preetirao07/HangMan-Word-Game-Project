@@ -1,0 +1,69 @@
+# create a word list
+
+word_list = words = [
+    "apple", "brave", "crane", "doubt", "eagle", "flame", "grape", "house", "inlet", "jelly",
+    "knock", "light", "march", "noble", "ocean", "peace", "queen", "rival", "snake", "trust",
+    "ultra", "vigor", "whale", "xenon", "young", "zebra", "baker", "cabin", "delta", "fancy",
+    "gleam", "honey", "ideal", "jolly", "karma", "liver", "mirth", "nerve", "orbit", "plaza",
+    "quack", "rural", "scout", "trick", "uncle", "vocal", "wrist", "yeast", "zesty", "brush"
+]
+
+# add lives 
+# to add lives, create a 'lives' to keep of the track of no. of lives left
+# set lives to 6
+lives = 6
+import random
+chosen_word = random.choice(word_list)
+# create a 'placeholder' with the same number of blanks as the chosen word
+placeholder = ""
+word_length = len(chosen_word)
+for position in range(word_length):
+  placeholder += "-"
+print(placeholder)
+Guess = input("Guess a letter: ").lower()
+
+for letter in chosen_word:
+  if letter == Guess:
+    print("Right")
+  else:
+    print("wrong")
+
+# create a 'display' that puts the guess letter in the right place
+display = ""
+for letter in chosen_word:
+  if letter == Guess:
+    display += letter
+  else:
+    display += "_"
+
+print(display)
+# make sure that the previous letter is still in the display
+
+# use a while loop to let the user guess again
+game_over = False
+correct_letter = []
+while not game_over:
+  Guess = input("Guess a letter: ").lower()
+  display = ""
+  # change the for loop so that you keep the previous correct word in the deisplay
+  # use append function & elif to ensure it
+  for letter in chosen_word:
+    if  letter == Guess:
+      display += letter
+      correct_letter.append(Guess)
+    elif letter in correct_letter:
+      display += letter
+    else:
+      display += "-"
+  print(display)
+
+#  if guess is not a letter in the chosen_word, then reduce 'lives' by 1
+#  if lives goes down to zero then the game should stop and it should print "you lost!"
+  if Guess not in chosen_word:
+    lives -= 1
+    if lives == 0:
+      game_over = True
+      print("You lose!")
+
+  if "-" not in display:
+    game_over = True
